@@ -31,4 +31,9 @@ const Book = sequelize.define(
   }
 );
 
+await Book.sync().catch((err) => {
+  console.error("Error syncing the database: ", err.message);
+  process.exit(1);
+});
+
 export default Book;
