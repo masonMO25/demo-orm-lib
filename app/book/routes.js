@@ -1,4 +1,9 @@
-import express from "express";
-const router = express.Router();
+import { Router } from "express";
 
-router.get("/", (req, res) => {});
+const router = Router();
+
+router.get("/", (_, res) => {
+  res.send("GET /api/books");
+});
+
+export default Router;
