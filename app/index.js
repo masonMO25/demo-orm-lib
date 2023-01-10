@@ -1,1 +1,3 @@
-export const add2Nums = (num1, num2) => num1 + num2;
+import connection from "./conn.js";
+
+console.log(connection);
