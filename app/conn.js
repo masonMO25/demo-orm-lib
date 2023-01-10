@@ -2,8 +2,8 @@ import { Sequelize } from "sequelize";
 import config from "./config.js";
 
 const sequelize = new Sequelize(
-  config.db.user,
   config.db.name,
+  config.db.user,
   config.db.password,
   { host: "localhost", dialect: "mysql" }
 );
