@@ -1,3 +1,9 @@
-import connection from "./conn.js";
+import express from "express";
+const app = express();
+const port = 3000;
 
-console.log(connection);
+app.get("/", (req, res) => {
+  res.send("hello").json({ message: "hi" });
+});
+
+app.listen(port);
