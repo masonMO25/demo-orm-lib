@@ -8,6 +8,10 @@ app.use(express.json());
 
 app.use("/api/books", bookRouter);
 
+app.use((req, res) => {
+  res.status(404).json({ message: "Not found" });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
