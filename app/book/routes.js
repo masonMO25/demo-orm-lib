@@ -3,7 +3,7 @@ import controller from "./controller.js";
 
 const router = Router();
 
-router.get("/seed", (_, res) => {
+router.post("/seed", (_, res) => {
   controller
     .seed()
     .then(() => {
@@ -25,4 +25,46 @@ router.get("/", (_, res) => {
     });
 });
 
-export default Router;
+router.get("/:isbn", async (req, res) => {
+  const { isbn } = req.params;
+
+  const book = await controller.show(isbn).catch((err) => {
+    res.status(500).json({ message: err.message });
+  });
+
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).json({ message: `Book with ISBN ${isbn} not found.` });
+  }
+});
+
+router.put("/:isbn", async (req, res) => {
+  const { isbn } = req.params;
+
+  const updateResults = await controller.update(isbn, req.body).catch((err) => {
+    res.status(500).json({ message: err.message });
+  });
+
+  if (updateResults) {
+    res.json({ message: `Book with ISBN ${isbn} updated.` });
+  } else {
+    res.status(404).json({ message: `Book with ISBN ${isbn} not found.` });
+  }
+});
+
+router.delete("/:isbn", async (req, res) => {
+  const { isbn } = req.params;
+
+  const deleteResults = await controller.delete(isbn).catch((err) => {
+    res.status(500).json({ message: err.message });
+  });
+
+  if (deleteResults) {
+    res.json({ message: `Book with ISBN ${isbn} deleted.` });
+  } else {
+    res.status(404).json({ message: `Book with ISBN ${isbn} not found.` });
+  }
+});
+
+export default router;
