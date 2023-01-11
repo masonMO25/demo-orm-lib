@@ -57,8 +57,8 @@ export default {
   seed() {
     return Book.bulkCreate(SEED_DATA);
   },
-  findAllBooks() {
-    return Book.findAll();
+  findAllBooks(columns) {
+    return Book.findAll({ attributes: columns });
   },
 
   show(isbn) {
