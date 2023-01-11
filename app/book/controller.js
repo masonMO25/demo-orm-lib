@@ -57,8 +57,23 @@ export default {
   seed() {
     return Book.bulkCreate(SEED_DATA);
   },
-
   findAllBooks() {
     return Book.findAll();
+  },
+
+  show(isbn) {
+    return Book.findOne({
+      where: {
+        isbn,
+      },
+    });
+  },
+
+  update(isbn, payload) {
+    return Book.update(payload, { where: { isbn } });
+  },
+
+  delete(isbn) {
+    return Book.destroy({ where: { isbn } });
   },
 };
